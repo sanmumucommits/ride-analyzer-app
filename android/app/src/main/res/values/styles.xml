@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is running when the app is launched from the home screen -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <!-- Show a splash screen on the app load. Automatically removed when
+             the Flutter engine loads the first frame -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    
+    <!-- Normal theme applied after the launch screen is gone -->
+    <style name="NormalTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

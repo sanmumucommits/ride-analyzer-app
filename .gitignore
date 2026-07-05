@@ -1,0 +1,67 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+*.apk
+*.app
+*.deb
+*.dmg
+*.ipa
+*.linux
+*.macos
+*.msix
+*.snap
+*.web
+*.windows
+.pub-cache/
+.pub/
+
+# Android
+android/.gradle/
+android/.idea/
+android/app/build/
+android/build/
+android/gradlew
+android/gradlew.bat
+android/local.properties
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/App.framework/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/Flutter/flutter_patched_sdk/
+ios/Flutter/GeneratedPluginRegistrant.*
+ios/Runner.xcworkspace/
+ios/Runner.xcodeproj/project.pbxproj
+
+# IntelliJ / Android Studio
+*.iml
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Hive
+*.hive
+*.lock
+
+# Environment
+.env
