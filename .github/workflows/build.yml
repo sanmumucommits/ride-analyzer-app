@@ -5,7 +5,7 @@ on:
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master ]
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,21 +21,22 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    - name: Setup Flutter
-      uses: flutter-actions/setup-flutter@v3
-      with:
-        flutter-version: '3.24.0'
-        channel: 'stable'
-    
+    - name: Install Flutter
+      run: |
+        git clone --depth 1 --branch 3.24.0 https://github.com/flutter/flutter.git /opt/flutter
+        echo "/opt/flutter/bin" >> $GITHUB_PATH
+        flutter precache
+        flutter doctor -v
+
     - name: Install Flutter dependencies
       run: flutter pub get
-    
+
     - name: Build debug APK
       run: flutter build apk --debug
-    
+
     - name: Build release APK
       run: flutter build apk --release
-    
+
     - name: Upload debug APK
       uses: actions/upload-artifact@v4
       with:
