@@ -30,10 +30,7 @@ jobs:
         echo "/opt/flutter/bin" >> $GITHUB_PATH
 
     - name: Verify Flutter
-      run: |
-        flutter --version
-        flutter precache
-        flutter doctor --android-licenses
+      run: flutter --version
 
     - name: Install Flutter dependencies
       run: flutter pub get
