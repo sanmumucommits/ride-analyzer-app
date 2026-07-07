@@ -103,14 +103,33 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
     });
 
     try {
+      // Use FileType.any and filter manually for better Android compatibility
       final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['fit', 'FIT'],
+        type: FileType.any,
         allowMultiple: true,
       );
 
       if (result != null && result.files.isNotEmpty) {
-        for (final file in result.files) {
+        // Filter only .fit files (case-insensitive)
+        final fitFiles = result.files.where((file) {
+          final ext = file.extension?.toLowerCase();
+          final name = file.name.toLowerCase();
+          return ext == 'fit' || name.endsWith('.fit');
+        }).toList();
+
+        if (fitFiles.isEmpty) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('No .fit files found in selection'),
+                backgroundColor: Colors.orange,
+              ),
+            );
+          }
+          return;
+        }
+
+        for (final file in fitFiles) {
           if (file.path != null) {
             // Import the file
             await ref.read(activityListProvider.notifier).importFromFit(file.path!);
@@ -120,7 +139,7 @@ class _ImportScreenState extends ConsumerState<ImportScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Successfully imported ${result.files.length} file(s)'),
+              content: Text('Successfully imported ${fitFiles.length} FIT file(s)'),
               backgroundColor: Colors.green,
             ),
           );
