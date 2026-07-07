@@ -21,12 +21,19 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    - name: Install Flutter
+    - name: Download Flutter SDK
       run: |
-        git clone --depth 1 --branch 3.24.0 https://github.com/flutter/flutter.git /opt/flutter
+        cd /opt
+        curl -sL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.0-stable.tar.xz -o flutter.tar.xz
+        tar xf flutter.tar.xz
+        rm flutter.tar.xz
         echo "/opt/flutter/bin" >> $GITHUB_PATH
+
+    - name: Verify Flutter
+      run: |
+        flutter --version
         flutter precache
-        flutter doctor -v
+        flutter doctor --android-licenses
 
     - name: Install Flutter dependencies
       run: flutter pub get
